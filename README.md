@@ -11,10 +11,13 @@ gci.csv
 
 Downloaded from
 http://www.weforum.org/issues/competitiveness-0/gci2012-data-platform/
+Choose tab 'Data download'
 Selections:
 - Series = "Global Competitiveness Index, 1-7 (best)"
 - Attribute = "Score"
-- Income group = "High income (OECD)"
+- Edition = "2009-10"
+
+Then choose 'Export' and 'Table (without value formatting)'. Open in Excel and resave as CSV.
 
 irreligion.csv
 --------------

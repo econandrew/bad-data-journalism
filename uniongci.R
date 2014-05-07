@@ -73,7 +73,11 @@ plot(GCI2010 ~ Union2010, data=ugci,
      main="Unionization and economic competitiveness (III)")
 points(GCI2010 ~ Union2010, data=ugci[(ugci$Country %in% nordics),],
        pch=1, cex=1.8, col="blue")
-abline( fit.nonnordic, col="red" )
+abline( fit.nonnordic, col="red", lty="longdash" )
+r2 <- formatC(summary(fit.nonnordic)$r.squared, format="f", digits = 2)
+p <- formatC(anova(fit.nonnordic)$'Pr(>F)'[1], format="f",  digits = 2)
+text(70, 1, bquote(.('p-value') ==.(p)))
+text(70, 0.5, bquote(R^2 == .(r2)))
 dev.off()
 
 ############################################################################ ###
@@ -84,9 +88,14 @@ ugci$growth1012 <- (sqrt(ugci$GDP2012/ugci$GDP2010)-1)*100
 fit.gdpgrowth <- lm(growth1012 ~ Union2010, data = ugci)
 
 png('out/uniongdpgrowth.png',width=1000, height=1000, res=180)
+par(mar = c(5, 6, 4, 2) + 0.1)
 plot(growth1012 ~ Union2010, data=ugci,
      pch=19, xlim=c(0, 80), ylim=c(-10,10), frame.plot=F, cex=0.75,
-     xlab="% of workers in a union", ylab="Annualised growth GDP per capita (constant PPP), 2010-2012",
+     xlab="% of workers in a union", ylab="Annualised % growth in GDP per capita\n(constant PPP), 2010-2012",
      main="Unionization and actual economic growth")
 abline( fit.gdpgrowth, col="red", lty="longdash" )
+r2 <- formatC(summary(fit.gdpgrowth)$r.squared, format="f", digits = 2)
+p <- formatC(anova(fit.gdpgrowth)$'Pr(>F)'[1], format="f",  digits = 2)
+text(70, -7.5, bquote(.('p-value') ==.(p)))
+text(70, -9, bquote(R^2 == .(r2)))
 dev.off()
